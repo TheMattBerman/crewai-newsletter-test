@@ -1,11 +1,13 @@
+import os 
+import datetime
 from crewai import Crew, Process
 from langchain_openai import ChatOpenAI
 from agents import AINewsLetterAgents
 from tasks import AINewsLetterTasks
 from file_io import save_markdown
 
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 # Initialize the agents and tasks
 agents = AINewsLetterAgents()
@@ -44,3 +46,24 @@ results = crew.kickoff()
 # Print the results
 print("Crew Work Results:")
 print(results)
+
+# Save the results to a markdown file
+# Ensure the 'results' directory exists
+folder_name = "results"
+os.makedirs(folder_name, exist_ok=True)
+
+# Get the current date and time
+now = datetime.datetime.now()
+
+# Format the date and time as a string 'YYYY-MM-DD-HHMMSS'
+formatted_date_time = now.strftime("%Y-%m-%d-%H%M%S")
+
+# Create a file name with the current date and time
+file_name = f"{folder_name}/{formatted_date_time}.md"
+
+# Save results to the file
+with open(file_name, 'w') as file:
+    file.write("# Crew Work Results\n")
+    file.write(str(results) + "\n")
+
+print(f"Results saved in file named {file_name}")
