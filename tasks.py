@@ -1,62 +1,68 @@
 from datetime import datetime
 from crewai import Task
 
-
 class AINewsLetterTasks():
     def fetch_news_task(self, agent):
         return Task(
-            description=f'Fetch top AI news stories from the past 24 hours. The current time is {datetime.now()}.',
+            description=f'Fetch top news stories on marketing, social media, AI, and business growth from the past 24 hours. The current time is {datetime.now()}.',
             agent=agent,
             async_execution=True,
-            expected_output="""A list of top AI news story titles, URLs, and a brief summary for each story from the past 24 hours. 
+            expected_output="""A list of top news story titles, URLs, and a brief summary for each story from the past 24 hours. Topics include marketing, social media, AI, and business growth. 
                 Example Output: 
                 [
-                    {  'title': 'AI takes spotlight in Super Bowl commercials', 
-                    'url': 'https://example.com/story1', 
-                    'summary': 'AI made a splash in this year\'s Super Bowl commercials...'
-                    }, 
-                    {{...}}
+                    {'title': 'New AI tools revolutionize small business marketing', 
+                     'url': 'https://example.com/story1', 
+                     'summary': 'Emerging AI technologies are transforming how small businesses approach marketing...'
+                    },
+                    {'title': 'Top strategies for growing your business on social media in 2024', 
+                     'url': 'https://example.com/story2', 
+                     'summary': 'Experts share top tips for leveraging social media platforms to boost business growth...'
+                    },
+                    {...}
                 ]
             """
         )
 
     def analyze_news_task(self, agent, context):
         return Task(
-            description='Analyze each news story and ensure there are at least 5 well-formatted articles',
+            description='Analyze news stories to curate at least 5 well-formatted articles on marketing, social media, AI, and business growth',
             agent=agent,
             async_execution=True,
             context=context,
             expected_output="""A markdown-formatted analysis for each news story, including a rundown, detailed bullet points, 
-                and a "Why it matters" section. There should be at least 5 articles, each following the proper format.
+                and a "Why it matters" section. Each summary should be followed by a clickable source URL in parentheses.
                 Example Output: 
-                '## AI takes spotlight in Super Bowl commercials\n\n
-                **The Rundown:
-                ** AI made a splash in this year\'s Super Bowl commercials...\n\n
-                **The details:**\n\n
-                - Microsoft\'s Copilot spot showcased its AI assistant...\n\n
-                **Why it matters:** While AI-related ads have been rampant over the last year, its Super Bowl presence is a big mainstream moment.\n\n'
+                '## [New AI tools revolutionize small business marketing](https://example.com/story1)\\n\\n
+                **The Rundown:** Emerging AI technologies are transforming how small businesses approach marketing...\\n\\n
+                **The details:**\\n\\n
+                - AI-driven analytics tools offer insights into customer behaviors...\\n\\n
+                **Why it matters:** These technologies allow small businesses to compete on a larger scale.\\n\\n
+                [source](https://example.com/story1)'
             """
         )
 
     def compile_newsletter_task(self, agent, context, callback_function):
         return Task(
-            description='Compile the newsletter',
+            description='Compile the newsletter, incorporating news on marketing, social media, AI, and business growth',
             agent=agent,
             context=context,
             expected_output="""A complete newsletter in markdown format, with a consistent style and layout.
                 Example Output: 
-                '# Top stories in AI today:\\n\\n
-                - AI takes spotlight in Super Bowl commercials\\n
-                - Altman seeks TRILLIONS for global AI chip initiative\\n\\n
+                '# Today's top stories in marketing, social media, AI, and business growth:\\n\\n
+                - [New AI tools revolutionize small business marketing](https://example.com/story1)\\n
+                - [Top strategies for growing your business on social media in 2024](https://example.com/story2)\\n\\n
 
-                ## AI takes spotlight in Super Bowl commercials\\n\\n
-                **The Rundown:** AI made a splash in this year\'s Super Bowl commercials...\\n\\n
+                ## [New AI tools revolutionize small business marketing](https://example.com/story1)\\n\\n
+                **The Rundown:** Emerging AI technologies are transforming how small businesses approach marketing...\\n\\n
                 **The details:**...\\n\\n
-                **Why it matters::**...\\n\\n
-                ## Altman seeks TRILLIONS for global AI chip initiative\\n\\n
-                **The Rundown:** OpenAI CEO Sam Altman is reportedly angling to raise TRILLIONS of dollars...\\n\\n'
+                **Why it matters:**...\\n\\n
+                [source](https://example.com/story1)\\n\\n
+
+                ## [Top strategies for growing your business on social media in 2024](https://example.com/story2)\\n\\n
+                **The Rundown:** Experts share top tips for leveraging social media platforms to boost business growth...\\n\\n
                 **The details:**...\\n\\n
-                **Why it matters::**...\\n\\n
+                **Why it matters:**...\\n\\n
+                [source](https://example.com/story2)\\n\\n
             """,
             callback=callback_function
         )
