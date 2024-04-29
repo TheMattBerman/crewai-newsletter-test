@@ -1,6 +1,7 @@
 import os 
 import datetime
 from crewai import Crew, Process
+from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from agents import AINewsLetterAgents
 from tasks import AINewsLetterTasks
