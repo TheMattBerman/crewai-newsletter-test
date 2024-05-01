@@ -1,13 +1,16 @@
+import os
 from crewai import Agent
 from tools.search_tools import SearchTools
+from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 
 
 class AINewsLetterAgents():
-    #def __init__(self):
-    #  self.llm = ChatGroq(
-    #      api_key=os.getenv("GROQ_API_KEY"),
-    #      model="mixtral-8x7b-32768"
-    #  )
+    def __init__(self):
+      self.llm = ChatGroq(
+          api_key = os.environ["GROQ_API_KEY"],
+          model="llama3-70b-8192"
+      )
 
       # self.llm = ChatOpenAI(
       #     model="gpt-4-turbo-preview",
@@ -18,10 +21,12 @@ class AINewsLetterAgents():
             role='Editor',
             goal='Oversee the creation of the Big Player Newsletter',
             backstory="""With a keen eye for detail and a passion for storytelling, you ensure that the newsletter
-            not only informs but also engages and inspires the readers. """,
+            not only informs but also engages and inspires founders, entrepreneurs, and brand managers. """,
             allow_delegation=True,
             verbose=True,
-            max_iter=15
+            #max_iter=15,
+            llm=self.llm,
+            max_iter=2,
         )
 
     def news_fetcher_agent(self):
@@ -33,6 +38,9 @@ class AINewsLetterAgents():
             tools=[SearchTools.search_internet],
             verbose=True,
             allow_delegation=True,
+            #max_iter=15,
+            llm=self.llm,
+            max_iter=2,
         )
 
     def news_analyzer_agent(self):
@@ -44,6 +52,9 @@ class AINewsLetterAgents():
             tools=[SearchTools.search_internet],
             verbose=True,
             allow_delegation=True,
+            #max_iter=15,
+            llm=self.llm,
+            max_iter=2,
         )
 
     def newsletter_compiler_agent(self):
@@ -54,4 +65,7 @@ class AINewsLetterAgents():
             ensuring a coherent and visually appealing presentation that captivates our readers. Make sure to follow
             newsletter format guidelines and maintain consistency throughout.""",
             verbose=True,
+            #max_iter=15,
+            llm=self.llm,
+            max_iter=2,
         )

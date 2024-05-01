@@ -4,10 +4,10 @@ from crewai import Task
 class AINewsLetterTasks():
     def fetch_news_task(self, agent):
         return Task(
-            description=f'Fetch top news stories on marketing, social media, AI, and business growth from the past 24 hours. The current time is {datetime.now()}.',
+            description=f'Fetch top news stories on marketing, social media, AI, and tech from the past week. They should be relevant for entrepreneurs, founders, and brand managers. The current time is {datetime.now()}.',
             agent=agent,
             async_execution=True,
-            expected_output="""A list of top news story titles, URLs, and a brief summary for each story from the past 24 hours. Topics include marketing, social media, AI, and business growth. 
+            expected_output="""A list of top news story titles, URLs, and a brief summary for each story from the past week. Topics include marketing, social media, AI, and tech. 
                 Example Output: 
                 [
                     {'title': 'New AI tools revolutionize small business marketing', 
@@ -25,7 +25,7 @@ class AINewsLetterTasks():
 
     def analyze_news_task(self, agent, context):
         return Task(
-            description='Analyze news stories to curate at least 5 well-formatted articles on marketing, social media, AI, and business growth',
+            description='Analyze news stories to curate at least 5 well-formatted articles on marketing, social media, AI, and tech. Your audience is founders, entrepreneurs, and brand managers.',
             agent=agent,
             async_execution=True,
             context=context,
@@ -43,7 +43,7 @@ class AINewsLetterTasks():
 
     def compile_newsletter_task(self, agent, context, callback_function):
         return Task(
-            description='Compile the newsletter, incorporating news on marketing, social media, AI, and business growth',
+            description='Compile the newsletter, incorporating news on marketing, social media, AI, and tech',
             agent=agent,
             context=context,
             expected_output="""A complete newsletter in markdown format, with a consistent style and layout.
