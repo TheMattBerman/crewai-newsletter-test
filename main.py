@@ -15,14 +15,16 @@ agents = AINewsLetterAgents()
 tasks = AINewsLetterTasks()
 
 # Initialize the OpenAI GPT-4 language model
-#OpenAIGPT4 = ChatOpenAI(
-#    model="gpt-4"
-#)
-# Initialize the ChatGroq language model
-manager_llm = ChatGroq(
-    api_key=os.getenv("GROQ_API_KEY"),
-    model="llama3-70b-8192"
+manager_llm = ChatOpenAI(
+    model="gpt-4o",
 )
+
+# Initialize the ChatGroq language model
+# manager_llm = ChatGroq(
+#     api_key=os.getenv("GROQ_API_KEY"),
+#     model="llama3-70b-8192"
+# )
+
 
 
 

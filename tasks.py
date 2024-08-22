@@ -4,7 +4,7 @@ from crewai import Task
 class AINewsLetterTasks():
     def fetch_news_task(self, agent):
         return Task(
-            description=f'Fetch top news stories on marketing, social media, AI, and tech from the past week. They should be relevant for entrepreneurs, founders, and brand managers. The current time is {datetime.now()}.',
+            description=f'Fetch top news stories on marketing, social media, AI, and tech from WITHIN THE MOST RECENT 7 DAYS. They should be relevant for entrepreneurs, founders, and brand managers. The current time is {datetime.now()}.',
             agent=agent,
             async_execution=True,
             expected_output="""A list of top news story titles, URLs, and a brief summary for each story from the past week. Topics include marketing, social media, AI, and tech. 
